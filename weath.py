@@ -86,4 +86,13 @@ class Weath:
         return bool(re.search(r'\b((rain|weather|wear|clothes|hot|cold|temperature))\b', text, re.IGNORECASE))
 
 w = Weath()
-#print w.tempSuggest()
+
+
+my_location = pywapi.get_weather_from_weather_com('75080')
+#print ("It is " + my_location['current_conditions']['text'].lower() + " and " + my_location['current_conditions']['temperature'] + " degrees celsius.")
+print w.tempSuggest() 
+chanceRain = int(my_location['forecasts'][1]['day']['chance_precip'])
+if(chanceRain is 0):
+    print "Skies look clear today!"
+elif(chanceRain > 0):
+    print "There's a " + chanceRain + "percent chance of rain today. Plan accordingly."
