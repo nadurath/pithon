@@ -4,20 +4,23 @@ from datetime import datetime
 import pywapi
 import string
 import pyttsx
-import spotipy
-
+from wordnik import *
 
 while True:
 
+    apiUrl = 'http://api.wordnik.com/v4'
+    apiKey = '86de19100a8fdee3293060dab9601d980abf66f1bba238506'
+    client = swagger.ApiClient(apiKey, apiUrl)
     r = sr.Recognizer()
-    sp = spotipy.Spotify()
-    playlist = 'spotify:user:tardskii:playlist:6GefCJPMmNQhstbWytWSPh'
+    wordApi = WordApi.WordApi(client)
+    
     engine = pyttsx.init()
     voices = engine.getProperty('voices')
     engine.setProperty('voice',voices[1].id)
     with sr.Microphone() as source:
         r.adjust_for_ambient_noise(source,duration=1)
-        print("How can I help you?")
+        engine.say("How can I help you?")
+        engine.runAndWait()
         audio = r.listen(source)
 
     req = r.recognize_google(audio)
@@ -55,10 +58,18 @@ while True:
             engine.say("Skies look clear today!")
             engine.runAndWait()
         elif(chanceRain > 0):
-            engine.say("There's a " + chanceRain + "percent chance of rain today. Plan accordingly.")
+            engine.say("There's a " + str(chanceRain) + "percent chance of rain today. Plan accordingly.")
+            engine.runAndWait()
+    elif "define" in req or "find" in req or "fine" in req or "mean" in req or "definition" in req:
+        reqSplit = req.split()
+        definitions = wordApi.getDefinitions(reqSplit[len(reqSplit)-1])
+        engine.say("Let me look that up for you.")
+        engine.say("The word" + reqSplit[len(reqSplit)-1] + "means" + definitions[0].text)
+        engine.runAndWait()
     elif "music" in req or "play" in req or "tunes" in req or "song" in req:
         engine.say("Coming right up!")
         engine.runAndWait()
-    elif "define" in req or "find" in req or "mean" in req or "definition" in req:
-        engine.say("Let me look that up for you.")
+    elif "quit" in req or "shut down" in req or "enough" in req:
+        engine.say("Shutting down now.")
         engine.runAndWait()
+        break
