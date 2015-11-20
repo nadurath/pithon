@@ -9,7 +9,7 @@ from wordnik import *
 while True:
 
     apiUrl = 'http://api.wordnik.com/v4'
-    apiKey = '86de19100a8fdee3293060dab9601d980abf66f1bba238506'
+    apiKey = 'MY_API_KEY'
     client = swagger.ApiClient(apiKey, apiUrl)
     r = sr.Recognizer()
     wordApi = WordApi.WordApi(client)
