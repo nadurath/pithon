@@ -24,7 +24,7 @@ while True:
         audio = r.listen(source)
 
     req = r.recognize_google(audio)
-    def tempSuggest():  # this function will suggest the type of clothes based on the temperature
+    def tempSuggest():  # this function will suggest the type of clothes based on the temperature 
         global string
         my_location = pywapi.get_weather_from_weather_com('75080')
         x = (int(my_location['current_conditions']['temperature']))
