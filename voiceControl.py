@@ -16,9 +16,9 @@ from wordnik import *
 
 #Loop parameter to be replaced by GPIO input (switch on / off).
 while True:
-
     apiUrl = 'http://api.wordnik.com/v4'                            #API URL and Key to access wordnik api for dictionary function.
     apiKey = '86de19100a8fdee3293060dab9601d980abf66f1bba238506'
+
     client = swagger.ApiClient(apiKey, apiUrl)
     r = sr.Recognizer()                                             #Initializing listener for audio from user.
     b = cleverbot.Cleverbot()                                       #Initialize bot.
@@ -34,6 +34,7 @@ while True:
         audio = r.listen(source)
 
     req = r.recognize_google(audio)
+    
     def tempSuggest():  # this function will suggest the type of clothes based on the temperature (written by Jordan Barnfield)
         global string
         my_location = pywapi.get_weather_from_weather_com('75080')
