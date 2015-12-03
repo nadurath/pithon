@@ -31,7 +31,7 @@ RECORD_SECONDS = 5
 WAV_FILE = path.join(path.dirname(path.realpath(__file__)), "file.wav")
 
 apiUrl = 'http://api.wordnik.com/v4'                            #API URL and Key to access wordnik api for dictionary function.
-apiKey = '86de19100a8fdee3293060dab9601d980abf66f1bba238506'
+apiKey = 'API_KEY'
 
 client = swagger.ApiClient(apiKey, apiUrl)                                         #Initializing listener for audio from user.
 b = cleverbot.Cleverbot()                                       #Initialize bot.
